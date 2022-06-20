@@ -1,11 +1,11 @@
-package ch.springboot.java.app.openapigenerator.service.impl;
+package cl.springboot.java.app.openapigenerator.service.impl;
 
-import ch.springboot.java.app.openapigenerator.model.CreateUserRequest;
-import ch.springboot.java.app.openapigenerator.model.CreateUserResponse;
-import ch.springboot.java.app.openapigenerator.model.FindUserResponse;
-import ch.springboot.java.app.openapigenerator.model.UpdateUserRequest;
-import ch.springboot.java.app.openapigenerator.repository.UserRepository;
-import ch.springboot.java.app.openapigenerator.service.UserService;
+import cl.springboot.java.app.openapigenerator.model.CreateUserRequest;
+import cl.springboot.java.app.openapigenerator.model.CreateUserResponse;
+import cl.springboot.java.app.openapigenerator.model.FindUserResponse;
+import cl.springboot.java.app.openapigenerator.model.UpdateUserRequest;
+import cl.springboot.java.app.openapigenerator.repository.UserRepository;
+import cl.springboot.java.app.openapigenerator.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package ch.springboot.java.app.openapigenerator;
+package cl.springboot.java.app.openapigenerator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

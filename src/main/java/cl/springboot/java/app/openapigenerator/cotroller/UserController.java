@@ -1,11 +1,11 @@
-package ch.springboot.java.app.openapigenerator.cotroller;
+package cl.springboot.java.app.openapigenerator.cotroller;
 
-import ch.springboot.java.app.openapigenerator.api.UserApi;
-import ch.springboot.java.app.openapigenerator.model.CreateUserRequest;
-import ch.springboot.java.app.openapigenerator.model.CreateUserResponse;
-import ch.springboot.java.app.openapigenerator.model.FindUserResponse;
-import ch.springboot.java.app.openapigenerator.model.UpdateUserRequest;
-import ch.springboot.java.app.openapigenerator.service.UserService;
+import cl.springboot.java.app.openapigenerator.api.UserApi;
+import cl.springboot.java.app.openapigenerator.model.CreateUserRequest;
+import cl.springboot.java.app.openapigenerator.model.CreateUserResponse;
+import cl.springboot.java.app.openapigenerator.model.FindUserResponse;
+import cl.springboot.java.app.openapigenerator.model.UpdateUserRequest;
+import cl.springboot.java.app.openapigenerator.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

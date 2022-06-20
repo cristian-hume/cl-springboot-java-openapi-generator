@@ -35,7 +35,7 @@ dependencies {
 
 openApiMeta {
 	generatorName = "openapi-generator"
-	packageName = "ch.springboot.java.app.openapigenerator"
+	packageName = "cl.springboot.java.app.openapigenerator"
 	outputFolder = "$buildDir/meta".toString()
 }
 
@@ -59,8 +59,8 @@ openApiGenerate {
 	outputDir = "$projectDir/src/main/generated".toString()
 	//outputDir = "$buildDir/generated".toString()
 
-	apiPackage = "ch.springboot.java.app.openapigenerator.api"
-	modelPackage = "ch.springboot.java.app.openapigenerator.model"
+	apiPackage = "cl.springboot.java.app.openapigenerator.api"
+	modelPackage = "cl.springboot.java.app.openapigenerator.model"
 
 	globalProperties = [
 			// force only the apis and models
