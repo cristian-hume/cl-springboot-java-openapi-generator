@@ -1,0 +1,328 @@
+openapi: 3.0.0
+info:
+  title: 'OpenAPI Generator'
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/api/v1'
+  - url: 'http://localhost:9090/api/v1'
+tags:
+  - name: 'User'
+    description: 'Operations about user'
+    externalDocs:
+      description: 'Find out more about our customer'
+      url: 'http://swagger.io'
+paths:
+  /user:
+    post:
+      tags:
+        - 'User'
+      summary: 'Create user'
+      description: 'Create new user.'
+      operationId: 'createUser'
+      requestBody:
+        description: 'Created user object'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+        required: true
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponse'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: 'Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Internal Server Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: 'Bad Gateway'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/{user_id}:
+    get:
+      tags:
+        - 'User'
+      summary: 'Find user'
+      description: 'Find user by user_id'
+      operationId: 'FindUser'
+      parameters:
+        - name: user_id
+          in: path
+          example: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+          description: 'The user_id that needs to be fetched. Use user1 for testing.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 'Ok'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindUserResponse'
+    put:
+      tags:
+        - 'User'
+      summary: 'Update user'
+      description: 'Update user by user_id.'
+      operationId: 'updateUser'
+      parameters:
+        - name: user_id
+          in: path
+          example: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+          description: 'The user_id that needs to be updated'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+        required: true
+      responses:
+        '200':
+          description: 'Ok'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: 'Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Internal Server Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: 'Bad Gateway'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - 'User'
+      summary: 'Delete user'
+      description: 'Delete user by user_id.'
+      operationId: 'deleteUser'
+      parameters:
+        - name: user_id
+          in: path
+          example: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+          description: 'The user_id that needs to be deleted'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Ok'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: 'Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Internal Server Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: 'Bad Gateway'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CreateUserRequest:
+      type: object
+      properties:
+        rut:
+          type: string
+          example: '11222333-4'
+        first_name:
+          type: string
+          example: 'Cristian'
+        last_name:
+          type: string
+          example: 'Hume Henriquez'
+        email:
+          type: string
+          example: 'cristian.hume@programmer.net'
+        phone:
+          type: string
+          example: '+56 9 8221 4860'
+        status:
+          type: string
+          example: 'Active'
+          description: 'User status'
+    CreateUserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+    FindUserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+        rut:
+          type: string
+          example: '11222333-4'
+        first_name:
+          type: string
+          example: 'Cristian'
+        last_name:
+          type: string
+          example: 'Hume Henriquez'
+        email:
+          type: string
+          example: 'cristian.hume@programmer.net'
+        phone:
+          type: string
+          example: '+56 9 8221 4860'
+        status:
+          type: string
+          example: 'Active'
+          description: 'User status'
+    UpdateUserRequest:
+      type: object
+      properties:
+        rut:
+          type: string
+          example: '11222333-4'
+        first_name:
+          type: string
+          example: 'Cristian'
+        last_mame:
+          type: string
+          example: 'Hume Henriquez'
+        email:
+          type: string
+          example: 'cristian.hume@programmer.net'
+        phone:
+          type: string
+          example: '+56 9 8221 4860'
+        status:
+          type: string
+          example: 'Active'
+          description: 'User status'
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: '2022-03-08 00:00:00.000'
+        status:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: 'Internal Server Error'
+        exception:
+          type: string
+          example: 'java.lang.ArithmeticException'
+        message:
+          type: string
+          example: '/ by zero'
+        trace:
+          type: string
+          example: 'java.lang.ArithmeticException: / by zero cl.scotiabank.app.Application.java:36'
+        path:
+          type: string
+          example: '/api/v1'
+

@@ -1,0 +1,99 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.6.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "org.openapi.generator" version "5.4.0"
+}
+
+group = 'cl.examples'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// https://mvnrepository.com/artifact/io.swagger/swagger-annotations
+	implementation group: 'io.swagger', name: 'swagger-annotations', version: '1.6.5'
+
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+
+	// https://mvnrepository.com/artifact/org.openapitools/jackson-databind-nullable
+	implementation group: 'org.openapitools', name: 'jackson-databind-nullable', version: '0.2.2'
+
+	// https://mvnrepository.com/artifact/javax.validation/validation-api
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+openApiMeta {
+	generatorName = "openapi-generator"
+	packageName = "ch.springboot.java.app.openapigenerator"
+	outputFolder = "$buildDir/meta".toString()
+}
+
+openApiValidate {
+	// inputSpec = "$rootDir/src/main/resources/openapi/api.yml".toString()
+	inputSpec = "$projectDir/src/main/resources/openapi/api.yml".toString()
+	recommend = true
+}
+
+task openApiGenerateClean(group: 'OpenAPI Tools', type: Delete, description: 'Delete the directory that OPENApi generator uses') {
+	delete 'src/main/generated'
+}
+//tasks['openApiGenerate'].dependsOn openApiGenerateClean
+
+openApiGenerate {
+	generatorName = "spring"
+
+	inputSpec = "$rootDir/src/main/resources/openapi/api.yml".toString()
+	// inputSpec = "$projectDir/src/main/resources/openapi/api.yml".toString()
+
+	outputDir = "$projectDir/src/main/generated".toString()
+	//outputDir = "$buildDir/generated".toString()
+
+	apiPackage = "ch.springboot.java.app.openapigenerator.api"
+	modelPackage = "ch.springboot.java.app.openapigenerator.model"
+
+	globalProperties = [
+			// force only the apis and models
+			apis: '',
+			invokers: 'false',
+			models: '',
+			supportingFiles: 'false'
+			//supportingFiles: 'ApiUtil.java'
+	]
+
+	configOptions = [
+			dateLibrary: "java8",
+			hideGenerationTimestamp: 'true',
+			sourceFolder           : "",
+			useTags                : "true",
+			delegatePattern        : "false",
+			interfaceOnly          : "true",
+			useOptional			   : "false",
+			skipDefaultInterface   : "true"
+	]
+
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+clean.dependsOn tasks.openApiGenerateClean
+// compileJava.mustRunAfter tasks.openApiGenerate
+
+sourceSets.main.java.srcDirs += "$projectDir/src/main/generated"
+// sourceSets.main.java.srcDir "$projectDir/src/main/generated"
+// sourceSets.main.java.srcDir "${buildDir}/src/main/generated"
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+defaultTasks 'build'
